@@ -41,3 +41,17 @@ existing_support_bundles <- existing_support_bundles[!grepl("\\.zip", existing_s
 bundles_failed_to_download <- setdiff(missing_errors, existing_support_bundles)
 
 missing_errors
+
+summaries <- list.files(paste0(data_directory, 'support-bundle-summary-ml'), full.name=TRUE)
+
+df <- lapply(summaries, function(target) {
+  df <- read.csv(target)
+}) %>% do.call(rbind, .)
+
+file_types <- lapply(df$File_Path, function(target) {
+  x <- stringi::stri_split(target, regex="/") %>% unlist()
+  x <- x[length(x)]
+}) %>% unlist()
+
+file_types[grep("logjam", file_types)] <- "logjam.log"
+table(file_types)
