@@ -122,10 +122,11 @@ if __name__ == "__main__":
     #path_or_pretrained = "bert-base-cased"
     base_dir = '/mnt/artifacts/models'
 
-    path_or_pretrained = os.path.join(base_dir, os.listdir(base_dir)[1])
-    classifier = HuggingFaceClassifier(path_or_pretrained)
-    
-    project_name = 'allstate_log_github'
+    #path_or_pretrained = os.path.join(base_dir, os.listdir(base_dir)[1])
+    #classifier = HuggingFaceClassifier(path_or_pretrained)
+    classifier = HuggingFaceClassifier(path_or_pretrained='bert-base-cased', num_labels=4)
+    project_name = os.environ.get('DOMINO_PROJECT_NAME')
+
     data_directory = '/mnt/data/' + project_name + '/'
 
     dir_name = os.path.join(data_directory, 'classification_data')
@@ -142,6 +143,8 @@ if __name__ == "__main__":
     
 
     text = df_test['text'].to_list()
+
+    classifier.train(df = df_train)
 
     predictions = classifier.predict(text)
 
