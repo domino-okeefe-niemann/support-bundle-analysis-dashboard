@@ -61,7 +61,7 @@ class HuggingFaceClassifier:
         
         scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=num_training_steps)
         
-        # progress_bar = tqdm(range(num_training_steps))
+        progress_bar = tqdm(range(num_training_steps))
         
         # Training loop
         self.model.train()
@@ -76,7 +76,7 @@ class HuggingFaceClassifier:
                 scheduler.step()
                 optimizer.zero_grad()
                 
-                # progress_bar.update(1)
+                progress_bar.update(1)
 
         # Set model back to evaluation mode
         self.model.eval()
