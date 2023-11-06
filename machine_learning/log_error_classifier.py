@@ -81,7 +81,7 @@ class HuggingFaceClassifier:
         # Set model back to evaluation mode
         self.model.eval()
 
-    def save_model(self, path: str):
+    def save_model(self, model_directory: str):
         self.model.save_pretrained(model_directory)
         self.tokenizer.save_pretrained(model_directory)
         
@@ -96,7 +96,8 @@ class HuggingFaceClassifier:
 
         all_predicted_classes = []
         all_probs = []
-
+        
+        progress_bar = tqdm(range(0, len(texts), batch_size))
         # Split texts into smaller batches and predict
         for i in range(0, len(texts), batch_size):
             batch_texts = texts[i: i + batch_size]
@@ -115,6 +116,8 @@ class HuggingFaceClassifier:
 
             all_predicted_classes.extend(predicted_classes)
             all_probs.append(probs.cpu().numpy())
+            
+            progress_bar.update(1)
 
         return all_predicted_classes, np.concatenate(all_probs, axis=0)
 
@@ -135,7 +138,7 @@ if __name__ == "__main__":
 
     dir_name = os.path.join(data_directory, 'classification_data')
     df_train = pd.read_csv(os.path.join(dir_name, "20231106_172505_train_small.csv"))
-    df_train2 = pd.read_csv(os.path.join(dir_name, "train_small.csv"))
+    #df_train2 = pd.read_csv(os.path.join(dir_name, "train_small.csv"))
     df_train = df_train[1:100]
 
     df_test = pd.read_csv(os.path.join(dir_name, "20231106_172505_test_small.csv"))
@@ -146,13 +149,15 @@ if __name__ == "__main__":
     
     df_train['label'] = df_train['label'].apply(lambda x: text_to_label[x])
     df_test['label'] = df_test['label'].apply(lambda x: text_to_label[x])
+    df_test = df_test[df_test['text'].notna()]
+
+    texts = df_test['text'].to_list()
     
-
-    text = df_test['text'].to_list()
-
     classifier.train(df = df_train)
 
-    predictions = classifier.predict(text)
+    predictions, probs = classifier.predict(texts)
+
+    classifier.save_model('/mnt/artifacts/models/log_parser'+datetime.now().strftime('%Y%m%d_%H%M%S'))
 
     print("The predictions have been done!")
 

@@ -3,7 +3,7 @@ sys.path.append("/mnt/code/machine_learning/")
 
 import log_error_classifier
 
-model_path = '/mnt/artifacts/models/log_classification_20231106_212241'
+model_path = '/mnt/artifacts/models/log_classification_20231019_205618'
 classifier = log_error_classifier.HuggingFaceClassifier(path_or_pretrained=model_path)
 
 
