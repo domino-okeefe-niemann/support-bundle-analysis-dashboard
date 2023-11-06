@@ -8,3 +8,18 @@
 2023-10-30 17:00:07.628 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] New connection established.
 2023-10-30 17:00:07.634 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] <601> Launched Extension Host Process.
 2023-10-30 17:00:10.153 [warning] Using the in-memory credential store as the operating system's credential store could not be accessed. Please see https://aka.ms/vscode-server-keyring on how to set this up. Details: libsecret-1.so.0: cannot open shared object file: No such file or directory
+2023-10-30 17:14:58.974 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] The client has reconnected.
+2023-10-30 17:14:59.322 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 17:30:16.461 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 17:35:47.990 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] The client has reconnected.
+2023-10-30 17:36:08.868 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 17:38:11.737 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 17:38:12.103 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] The client has reconnected.
+2023-10-30 17:59:13.001 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] The client has reconnected.
+2023-10-30 17:59:13.352 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 18:08:53.874 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] The client has reconnected.
+2023-10-30 18:08:53.974 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 18:12:52.274 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] The client has reconnected.
+2023-10-30 18:12:52.629 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has reconnected.
+2023-10-30 18:25:01.656 [info] [100.164.95.134][f0af0cbb][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2023-10-30 18:25:01.729 [info] [100.164.95.134][4da1c440][ExtensionHostConnection] <601> Extension Host Process exited with code: 0, signal: null.

@@ -8,6 +8,8 @@ from datetime import datetime
 from sklearn.model_selection import train_test_split
 from datasets import Dataset, DatasetDict
 
+from tqdm.auto import tqdm
+
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 from transformers import AdamW, AutoTokenizer, AutoModelForSequenceClassification, get_linear_schedule_with_warmup
@@ -55,6 +57,8 @@ class HuggingFaceClassifier:
         
         scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=num_training_steps)
         
+        # progress_bar = tqdm(range(num_training_steps))
+        
         # Training loop
         self.model.train()
         for epoch in range(epochs):
@@ -67,6 +71,8 @@ class HuggingFaceClassifier:
                 optimizer.step()
                 scheduler.step()
                 optimizer.zero_grad()
+                
+                # progress_bar.update(1)
 
         # Set model back to evaluation mode
         self.model.eval()

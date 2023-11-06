@@ -14,3 +14,10 @@ info 17:01:03.899: Find preferred kernel for /mnt/code/machine_learning/log_erro
 info 17:01:03.902: Preferred Remote kernel for /mnt/code/machine_learning/log_error_classifier_playground.ipynb is undefined
 info 17:01:03.902: Preferred kernel .jvsc74a57bd0d4d1e4263499bec80672ea0156c357c1ee493ec2b1c70f0acce89fc37c4a6abe./opt/conda/python./opt/conda/python.-m#ipykernel_launcher is exact match or top match for non python kernels, (false, [object Object], true, false)
 info 17:01:03.903: PreferredConnection: .jvsc74a57bd0d4d1e4263499bec80672ea0156c357c1ee493ec2b1c70f0acce89fc37c4a6abe./opt/conda/python./opt/conda/python.-m#ipykernel_launcher found for NotebookDocument: /mnt/code/machine_learning/log_error_classifier_playground.ipynb
+info 18:25:01.671: Shutting down notebooks for 3154a8c8-b4c0-4aeb-806c-5f9611a01610
+info 18:25:01.671: Disposing HostJupyterExecution 0cb807f2-0ab4-4896-939a-41c8499f0bc7
+info 18:25:01.671: Disposing super HostJupyterExecution 0cb807f2-0ab4-4896-939a-41c8499f0bc7
+info 18:25:01.672: Disposing HostJupyterExecution 0cb807f2-0ab4-4896-939a-41c8499f0bc7
+info 18:25:01.672: Finished disposing HostJupyterExecution  0cb807f2-0ab4-4896-939a-41c8499f0bc7
+info 18:25:01.677: Cleaning up server cache 0cb807f2-0ab4-4896-939a-41c8499f0bc7
+info 18:25:01.678: Finished disposing HostJupyterExecution  0cb807f2-0ab4-4896-939a-41c8499f0bc7

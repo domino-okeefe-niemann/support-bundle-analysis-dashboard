@@ -17,3 +17,70 @@
 2023-10-30 17:01:03.892 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-slideshow, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
 2023-10-30 17:09:15.785 [error] Error: read ECONNRESET
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2023-10-30 18:25:01.655 [info] Extension host terminating: received terminate message from renderer
+2023-10-30 18:25:01.656 [info] Lock '/mnt/code/.vscode/User/workspaceStorage/41f8cd8a/vscode.lock': Marking the lockfile as scheduled to be released in 6000 ms.
+2023-10-30 18:25:01.679 [error] Canceled: Canceled
+    at new u (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/services/extensions/common/lazyPromise.ts:99:15)
+    at l.O (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/services/extensions/common/rpcProtocol.ts:460:11)
+    at Proxy.V.<computed>.M.charCodeAt.V.<computed> (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/services/extensions/common/rpcProtocol.ts:253:19)
+    at s.g (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:209:38)
+    at s.executeCommand (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:168:15)
+    at w.registerCommand.description (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:125:38)
+    at s.h (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:242:26)
+    at s.g (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:179:16)
+    at s.executeCommand (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:168:15)
+    at Object.executeCommand (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHost.api.impl.ts:298:28)
+    at D (/usr/lib/code-server/lib/vscode/extensions/git/dist/main.js:2:2055373)
+    at m.invoke (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:701:17)
+    at p.deliver (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:908:22)
+    at d.fire (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:869:24)
+    at Object.h [as dispose] (/usr/lib/code-server/lib/vscode/extensions/git/dist/main.js:2:2070210)
+    at /usr/lib/code-server/lib/vscode/extensions/git/dist/main.js:2:2074277
+    at Array.forEach (<anonymous>)
+    at g.dispose (/usr/lib/code-server/lib/vscode/extensions/git/dist/main.js:2:2074263)
+    at y.<anonymous> (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostTypes.ts:67:18)
+    at y.dispose (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostTypes.ts:83:23)
+    at y.<anonymous> (/usr/lib/code-server/lib/vscode/extensions/git/dist/main.js:2:2057503)
+    at y.dispose (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostTypes.ts:83:23)
+    at T (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/lifecycle.ts:150:8)
+    at p.X (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionService.ts:393:4)
+    at /usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionService.ts:224:17
+    at Array.map (<anonymous>)
+    at p.Q (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionService.ts:223:38)
+    at p.terminate (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionService.ts:251:38)
+    at f.terminate (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extensionHostMain.ts:162:26)
+    at onTerminate (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/node/extensionHostProcess.ts:406:54)
+    at /usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/node/extensionHostProcess.ts:245:6
+    at m.invoke (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:701:17)
+    at p.deliver (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:908:22)
+    at d.fire (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:869:24)
+    at g.fire (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/parts/ipc/common/ipc.net.ts:671:19)
+    at t.E (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/parts/ipc/common/ipc.net.ts:1109:23)
+    at /usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/parts/ipc/common/ipc.net.ts:1042:72
+    at m.invoke (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:701:17)
+    at p.deliver (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:908:22)
+    at d.fire (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:869:24)
+    at f.acceptChunk (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/parts/ipc/common/ipc.net.ts:415:21)
+    at /usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/parts/ipc/common/ipc.net.ts:371:51
+    at m.invoke (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:701:17)
+    at p.deliver (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:908:22)
+    at d.fire (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/common/event.ts:869:24)
+    at d.t (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/base/parts/ipc/node/ipc.net.ts:562:18) setContext undefined
+2023-10-30 18:25:01.707 [error] Canceled: Canceled
+    at new u (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/services/extensions/common/lazyPromise.ts:99:15)
+    at l.O (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/services/extensions/common/rpcProtocol.ts:460:11)
+    at Proxy.V.<computed>.M.charCodeAt.V.<computed> (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/services/extensions/common/rpcProtocol.ts:253:19)
+    at s.g (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:209:38)
+    at s.executeCommand (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:168:15)
+    at w.registerCommand.description (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:125:38)
+    at s.h (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:242:26)
+    at s.g (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:179:16)
+    at s.executeCommand (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostCommands.ts:168:15)
+    at Object.executeCommand (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHost.api.impl.ts:298:28)
+    at rejectionHandler (/home/domino/.local/share/code-server/extensions/github.copilot-1.115.430/extension/src/extension.ts:121:22)
+    at tryActivation (/home/domino/.local/share/code-server/extensions/github.copilot-1.115.430/extension/src/extension.ts:131:13)
+    at activate (/home/domino/.local/share/code-server/extensions/github.copilot-1.115.430/extension/src/extension.ts:177:5)
+    at m.n (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionActivator.ts:415:18)
+    at m (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionActivator.ts:410:3)
+    at m.l (/usr/lib/code-server/lib/vscode/out/vs/workbench/api/node/out-vscode-reh-web/vs/workbench/api/node/file:/home/runner/work/code-server/code-server/lib/vscode/src/vs/workbench/api/common/extHostExtensionActivator.ts:372:3) setContext undefined
+2023-10-30 18:25:01.716 [info] Extension host with pid 601 exiting with code 0
