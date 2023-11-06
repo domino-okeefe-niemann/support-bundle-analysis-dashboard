@@ -1,7 +1,7 @@
 {
 	"extensions.autoUpdate":false,
 	"extensions.autoCheckUpdates": false,
-	"python.pythonPath": "/opt/conda/bin/python",
+	"python.pythonPath": "/usr/bin/python",
 	"workbench.startupEditor": "none",
 	"workbench.colorTheme": "Default Dark+",
 	"python.defaultInterpreterPath": "/opt/conda/bin/python"

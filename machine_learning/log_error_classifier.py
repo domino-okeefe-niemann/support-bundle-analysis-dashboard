@@ -41,9 +41,13 @@ class HuggingFaceClassifier:
         self.model.eval()
 
     def train(self, df, epochs=3, batch_size=8, learning_rate=5e-5, warmup_steps=0):
-        
+        """
+        df - input data, expected schema should be: ['text', 'label']
+        """
+
         # Create a DataLoader
-        dataset_logs = Dataset.from_pandas(df)
+        df = df[df['text'].notna()]
+        dataset_logs = Dataset.from_pandas(df, preserve_index=False)
         tokenized_datasets_logs = dataset_logs.map(self._tokenize_function)
         tokenized_datasets_logs = tokenized_datasets_logs.remove_columns(["text"])
         tokenized_datasets_logs = tokenized_datasets_logs.rename_column("label", "labels")
@@ -130,9 +134,11 @@ if __name__ == "__main__":
     data_directory = '/mnt/data/' + project_name + '/'
 
     dir_name = os.path.join(data_directory, 'classification_data')
-    df_train = pd.read_csv(os.path.join(dir_name, "train_small.csv"))
+    df_train = pd.read_csv(os.path.join(dir_name, "20231106_172505_train_small.csv"))
+    df_train2 = pd.read_csv(os.path.join(dir_name, "train_small.csv"))
     df_train = df_train[1:100]
-    df_test = pd.read_csv(os.path.join(dir_name, "test_small.csv"))
+
+    df_test = pd.read_csv(os.path.join(dir_name, "20231106_172505_test_small.csv"))
     
     unique_labels = df_train['label'].unique()
     text_to_label = {'none':0, 'cluster':1, 'domino':2, 'user':3}
