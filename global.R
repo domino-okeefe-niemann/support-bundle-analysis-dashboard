@@ -1,7 +1,13 @@
 rm(list=ls())
 
-#### THESE SHOULD BE EDITED! ####
-source('./credentials.R')
+if(dir.exists('/mnt/data/')) {
+  data_directory_prefix <- '/mnt/data/'
+} else {
+  data_directory_prefix <- '/domino/datasets/local/'
+}
+domino_project_name <- list.files(data_directory_prefix, recursive=FALSE)[1]
+credentials_path <- paste0(data_directory_prefix, domino_project_name,'/credentials.R')
+source(credentials_path)
 
 # Load the required packages
 #### GLOBAL.R ####
