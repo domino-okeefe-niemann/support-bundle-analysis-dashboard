@@ -42,6 +42,9 @@ bundles_failed_to_download <- setdiff(missing_errors, existing_support_bundles)
 
 missing_errors
 
+
+#### What files do these errors come from? ####
+
 summaries <- list.files(paste0(data_directory, 'support-bundle-summary-ml'), full.name=TRUE)
 
 df <- lapply(summaries, function(target) {

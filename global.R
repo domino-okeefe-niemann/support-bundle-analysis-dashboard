@@ -92,6 +92,10 @@ if(!dir.exists(paste0(data_directory, "support-bundle-summary"))) {
   dir.create(paste0(data_directory, "support-bundle-summary"))
 }
 
+if(!dir.exists(paste0(data_directory, "support-bundle-summary-ml"))) {
+  dir.create(paste0(data_directory, "support-bundle-summary-ml"))
+}
+
 if(!dir.exists(paste0(data_directory, "resource-usage-by-day"))) {
   dir.create(paste0(data_directory, "resource-usage-by-day"))
 }

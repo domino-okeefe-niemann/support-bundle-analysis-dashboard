@@ -197,14 +197,25 @@ server <- function(input, output, session) {
                                width = "100%")
                 )
               ),
+            br(),
             fluidRow(
               align = "center",
               column(
-                width = 12,
+                width = 6,
                 div(class = "inline-radio",
                     shiny::radioButtons("use_cached_analysis", 
-                                        "",
-                                        choices = c("Use Cached Analytics"=TRUE, "Recreate Error Analysis"=FALSE))
+                                        "Use Cached Analytics From Previous Analyses?",
+                                        choices = c("Yes"=TRUE, "No"=FALSE))
+                )
+              ),
+              column(
+                width = 6,
+                div(class = "inline-radio",
+                    shiny::radioButtons("use_ml_model",
+                                        "Use Model to Identify Errors?",
+                                        choices = c("Yes"=TRUE, "No"=FALSE),
+                                        selected = FALSE
+                    )
                 )
               )
             ),
@@ -781,6 +792,8 @@ server <- function(input, output, session) {
   
   selected_execution_ids <- reactiveVal(NULL)
   support_button_counter <- reactiveVal(0)
+  
+  ##### Bundle Analysis Pipeline #####
   shiny::observeEvent(input$analyze_support_bundles, {
     # Update the uiOutput
     #cat("This is what the support bundle click is: ", support_button_counter(), "\n")
@@ -792,18 +805,18 @@ server <- function(input, output, session) {
             width = 6, # Maximum width to fill the container
             # Action Buttons
             fluidRow(
-              align = "center", 
+              align = "center",
               column(
-                width = 6, 
+                width = 6,
                 actionButton("analyze_support_bundles",
-                             "Analyze Support Bundles", 
+                             "Analyze Support Bundles",
                              style = "display: block; width: 100%; color: #fff; background-color: #337ab7;",
                              width = "100%")
               ),
               column(
-                width = 6, 
-                actionButton("reset_category_filter", 
-                             "Reset Secondary Category Filter", 
+                width = 6,
+                actionButton("reset_category_filter",
+                             "Reset Secondary Category Filter",
                              style = "display: block; width: 100%; color: #fff; background-color: #337ab7;",
                              width = "100%")
               )
@@ -811,11 +824,21 @@ server <- function(input, output, session) {
             fluidRow(
               align = "center",
               column(
-                width = 12,
+                width = 6,
                 div(class = "inline-radio",
-                    shiny::radioButtons("use_cached_analysis", 
+                    shiny::radioButtons("use_cached_analysis",
                                         "",
                                         choices = c("Use Cached Analytics"=TRUE, "Recreate Error Analysis"=FALSE))
+                )
+              ),
+              column(
+                width = 6,
+                div(class = "inline-radio",
+                    shiny::radioButtons("use_ml_model",
+                                        "Use Model to Identify Errors?",
+                                        choices = c("Yes"=TRUE, "No"=FALSE),
+                                        selected = FALSE
+                    )
                 )
               )
             ),
@@ -832,7 +855,7 @@ server <- function(input, output, session) {
             maximizable = TRUE,
             width= 6,
             #style = "width: 50%; margin-left: auto; margin-right: auto;",
-            shiny::tabPanel("Summary", 
+            shiny::tabPanel("Summary",
                             shiny::uiOutput("executions_with_errors_progress_bar"),
                             br(),
                             shinycssloaders::withSpinner(highcharter::highchartOutput(height = "600px", "error_summary_bar_chart")),
@@ -840,7 +863,7 @@ server <- function(input, output, session) {
                             textAreaInput("executions_no_errors_found", "Execution Ids without Found Errors", value = execution_ids_no_errors(), rows = length(unlist(execution_ids_no_errors()))+1),
                             textAreaInput("executions_failed_to_download", "Support Bundle Download Failures", value = execution_ids_failed_downloads_str(), rows = length(unlist(execution_ids_failed_downloads_str()))+1)
                             ),
-            shiny::tabPanel(height = "600px", "Data", 
+            shiny::tabPanel(height = "600px", "Data",
                             DT::DTOutput("error_render"),
                             HTML("<br>"),
                             shiny:: downloadButton("error_render_downloader", "Download")
@@ -856,17 +879,17 @@ server <- function(input, output, session) {
             # DTOutput
             # Action Buttons
             fluidRow(
-              align = "center", 
+              align = "center",
               column(
-                width = 6, 
-                actionButton("analyze_support_bundles", 
+                width = 6,
+                actionButton("analyze_support_bundles",
                              "Analyze Support Bundles",
                              style = "display: block; width: 100%; color: #fff; background-color: #337ab7;",
                              width = "100%")
               ),
               column(
-                width = 6, 
-                actionButton("reset_category_filter", 
+                width = 6,
+                actionButton("reset_category_filter",
                              "Reset Secondary Category Filter",
                              style = "display: block; width: 100%; color: #fff; background-color: #337ab7;",
                              width = "100%")
@@ -875,11 +898,21 @@ server <- function(input, output, session) {
             fluidRow(
               align = "center",
               column(
-                width = 12,
+                width = 6,
                 div(class = "inline-radio",
-                    shiny::radioButtons("use_cached_analysis", 
+                    shiny::radioButtons("use_cached_analysis",
                                         "",
                                         choices = c("Use Cached Analytics"=TRUE, "Recreate Error Analysis"=FALSE))
+                )
+              ),
+              column(
+                width = 6,
+                div(class = "inline-radio",
+                    shiny::radioButtons("use_ml_model",
+                                        "Use Model to Identify Errors?",
+                                        choices = c("Yes"=TRUE, "No"=FALSE),
+                                        selected = FALSE
+                    )
                 )
               )
             ),
@@ -893,10 +926,10 @@ server <- function(input, output, session) {
         )
       }
     })
-    
+
     support_button_counter(support_button_counter() + 1)
-    
-    
+
+
     #proxy <- dataTableProxy("report_render")
     # selectRows(proxy = proxy,
     #            selected = input$table_rows_current)
@@ -905,7 +938,7 @@ server <- function(input, output, session) {
     } else if (last_update() == "time_series") {
       row_subset <- report_df()
       row_subset <- row_subset[which(row_subset$target_col == input$clicked_target_col_val),]
-      
+
       target_timestamp <- input$clicked_target_col_date
       row_subset$started_timestamp_hour <- as.numeric(lubridate::ymd_hms(row_subset$started_time) %>% floor_date(., unit="hour"))*1000
       row_subset$completed_timestamp_hour <- as.numeric(lubridate::ymd_hms(row_subset$completed_time) %>% ceiling_date(., unit="hour"))*1000
@@ -922,8 +955,8 @@ server <- function(input, output, session) {
       selected_execution_ids(unique(row_subset$run_id[target_rows]))
     }
     download_list <- selected_execution_ids()
-    
-    
+
+
     # if(length(download_list) == 0) {
     #   download_list <- unique(row_subset$run_id)
     # }
@@ -940,14 +973,14 @@ server <- function(input, output, session) {
     # } else {
     #   url_list <- list(urls)
     # }
-    
+
     # Now loop through each id, pull execution file, perform summary analysis
-    
+
     withProgress(message='Downloading and Extracting Bundle summary', detail="Please wait...", value=0, {
       #.  ############# BEGINNING OF PARALLELIZED PROCESS ###################
       output_df <- data.frame()
       all_executions <- selected_execution_ids()#report_values$Run.id[which(report_values$Status %in% c("Failed", "Error"))]
-      
+
       #browser()
       # Identify all of the already existing summary files, load them into output_df
       # setdiff with all_executions for other downloads
@@ -955,31 +988,31 @@ server <- function(input, output, session) {
         #browser()
         all_existing_summary <- list.files(paste0(data_directory, 'support-bundle-summary'), full.names = TRUE)
         all_existing_ids <- stringi::stri_extract(all_existing_summary, regex="(?<=\\/support-bundle-summary\\/).*(?=-summary.csv)")
-        
+
         target_existing_ids <- intersect(all_existing_ids, all_executions)
         all_executions <- setdiff(all_executions, target_existing_ids)
-        
+
         if(length(target_existing_ids) > 0) {
           output_df <- lapply(target_existing_ids, function(target_id) {
             output <- read.csv(paste0(data_directory, 'support-bundle-summary/', target_id, '-summary.csv'))
           }) %>% do.call(rbind, .)
         }
       }
-      
-      
+
+
       # THE NEXT FUTURE IMPLEMENTATION: Perform regex extraction again WITHOUT downloading old bundles again
       already_existing_bundles <- list.files(paste0(data_directory, 'support-bundles'), full.names = FALSE)
       existing_bundle_ids <- already_existing_bundles[!grepl("\\.zip", already_existing_bundles)]
       relevant_existing_bundle_ids <- intersect(existing_bundle_ids, all_executions)
-      
+
       # The support bundle directories are names via their execution ids
       download_list <- setdiff(all_executions, relevant_existing_bundle_ids)
-      
+
       # Now avoid all the execution ids which already have support bundle zip files downloaded
-      
-      
+
+
       regex_pattern_df <<- regex_reactive_df()
-      
+
       # Download the files via async
       if (length(download_list) > 0) {
         urls <- paste0("https://", domino_url, "/v4/admin/supportbundle/", download_list)
@@ -988,14 +1021,14 @@ server <- function(input, output, session) {
       }
       headers <- c("X-Domino-Api-Key" = domino_user_api_key,
                    "accept" = "application/json")
-      
-      
+
+
       # Maximum number of connections is 128-3 (stdin/out/console) with 5 for wiggle room
       x <- 120
       indices <- (seq_along(urls) - 1) %/% x + 1
       # Split the URLs based on the group numbers
       url_list <- split(urls, indices)
-      
+
       # Loop through each batch of urls, using crul to ansychronously make api calls
       for (idx in seq_along(url_list)) {
         target_url <- url_list[[idx]]
@@ -1004,148 +1037,208 @@ server <- function(input, output, session) {
           urls = target_url,
           headers = headers
         )
-        
+
         execution_ids <- sapply(target_url, function(singles) stringi::stri_extract(singles, regex="(?<=supportbundle\\/).*")) %>% as.vector()
-        
+
         support_bundle_dir <- paste0(data_directory, 'support-bundles/')
         if(!dir.exists(support_bundle_dir)) {
           dir.create(support_bundle_dir)
         }
-        
-        
+
+
         zip_paths <- paste0(support_bundle_dir, execution_ids,".zip")
         res <- cc$get(disk=zip_paths)
       }
-      
+
       incProgress(1/2)
-      
+
       #browser()
       if (input$use_cached_analysis == FALSE) {
         download_list <- all_executions
       }
-      
+
       if(length(download_list) > 0) {
         all_file_paths <- paste0(data_directory, 'support-bundles/', download_list, '.zip')
         all_file_paths <- all_file_paths[file.exists(all_file_paths)]
       } else {
         all_file_paths <- c()
       }
-      
+
       if(length(relevant_existing_bundle_ids) > 0) {
         bundle_paths <- paste0(data_directory, 'support-bundles/', relevant_existing_bundle_ids)
         all_file_paths <- c(all_file_paths, bundle_paths)
       }
       #all_file_paths <- list.files(paste0(data_directory, "support-bundles/"), full.names=TRUE)
-      
+
       # Get the number of cores available
       no_cores <- parallel::detectCores() - 1  # using one less to leave a core free
-      
+
       # Use parLapply to unzip in parallel
       cl <- parallel::makeCluster(no_cores)
       dest_dir <<- paste0(data_directory, 'support-bundles')
-      
+
       parallel::clusterExport(cl, "dest_dir")
       parallel::clusterExport(cl, "identify_support_bundle_errors")
       parallel::clusterExport(cl, 'regex_pattern_df')
       parallel::clusterExport(cl, 'data_directory')
       # parallel::clusterExport(cl, 'model_rest_url')
       # parallel::clusterExport(cl, 'model_api_key')
-      
+
       parallel::clusterEvalQ(cl, {
         library(magrittr)
         library(httr)
         library(jsonlite)
       })
-      
+
       #browser()
       out <- parallel::parLapply(cl, all_file_paths, unzip_single) %>% do.call(rbind, .)
       parallel::stopCluster(cl)
-      
-      ##browser()
+
+      #browser()
       output_df <- rbind(output_df, out)
       
-      # found_errors <- lapply(output_df$File_Path, function(target) {
-      #   target <- stringi::stri_split(target, regex="/") %>% unlist()
-      #   out <- target[length(target)-1]
-      #   return(out)
-      # })
-      # 
-      # ml_errors <- setdiff(download_list, found_errors)
-      # ml_errors <- paste0(ml_errors, collapse="|")
-      # ml_support_bundles <- all_file_paths[grepl(ml_errors, all_file_paths) & !grepl("\\.zip", all_file_paths)]
-      # 
-      # # Now, identify any non-error "Error/Failed" files and push them through the model api
-      # # Machine learning API
-      # all_files <- list.files(ml_support_bundles, full.names=TRUE)
-      # all_files <- all_files[grep("executor|logjam|run|events|execution", all_files)]
-      # #a <- Sys.time()
-      # model_file_errors <- lapply(all_files, function(target_file_name) {
-      #   target_file <- readLines(target_file_name)
-      #   url <- model_rest_url # located in credentials.R (same with model_api_key)
-      #   response <- httr::POST(
-      #     url,
-      #     authenticate(model_api_key, model_api_key, type = "basic"),
-      #     body=toJSON(list(data=list(text = target_file)), auto_unbox = TRUE),
-      #     content_type("application/json")
-      #   )
-      #   
-      #   predictions <- content(response)
-      #   predictions <- unname(unlist(predictions$result))
-      #   
-      #   num_errors <- length(predictions[which(predictions != "none")])
-      #   # Identify any potential errors which are not none. If they exist, turn it into a dataframe. If not, just cbind that stuff
-      #   if(num_errors > 0) {
-      #     error_lines <- which(predictions != "none")
-      #     error_type <- predictions[error_lines]
-      #     error <- target_file[error_lines]
-      #     error_description <- target_file[error_lines]
-      #     data <- data.frame('Error'=errors, 'Line_Number'=error_lines, 'Context'=error_description, 'Error_Type'=error_type)
-      #     data$File_Path <- target_file_name
-      #     datetime_str <- stringi::stri_extract(data$Context, regex="\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z")
-      #     data$Date_Time <- lubridate::ymd_hms(datetime_str, tz = "UTC")
-      #     data$execution_id <- lapply(data$File_Path, function(file_path) {
-      #       file_path <- stringi::stri_split(file_path, regex="/") %>% unlist()
-      #       execution_id <- file_path[length(file_path)-1]
-      #     })
-      #     
-      #     associated_node <- target_file[grep("assignedNodeName", target_file)]
-      #     associated_node <- stringi::stri_extract(associated_node, regex="ip-[0-9]+-[0-9]+-[0-9]+-[0-9]+\\..*\\.compute.internal")
-      #     if(length(associated_node) > 0) {
-      #       data$Node <- associated_node
-      #     } else {
-      #       data$Node <- NA
-      #     }
-      #     
-      #     out <- data
-      #   } else {
-      #     out <- data.frame(
-      #       Error = character(0),
-      #       Line_Number = integer(0),
-      #       Context = character(0),
-      #       Error_Type = character(0),
-      #       File_Path = character(0),
-      #       Node = character(0)
-      #     )
-      #   }
-      # }) %>% do.call(rbind, .)
-      # 
-      # 
-      # # browser()
-      # output_df <- rbind(output_df, model_file_errors)
+      if(input$use_ml_model) {
+        ml_execution_ids <- setdiff(download_list, output_df$execution_id)
+  
+        # PRE-CACHED: Check the already existing runs first
+        if(dir.exists(paste0(data_directory, 'support-bundle-summary-ml')) & input$use_cached_analysis == TRUE) {
+          #browser()
+          all_existing_summary <- list.files(paste0(data_directory, 'support-bundle-summary-ml'), full.names = TRUE)
+          all_existing_ids <- stringi::stri_extract(all_existing_summary, regex="(?<=\\/support-bundle-summary-ml\\/).*(?=-summary.csv)")
+          
+          target_existing_ids <- intersect(all_existing_ids, ml_execution_ids)
+          ml_execution_ids <- setdiff(ml_execution_ids, target_existing_ids)
+          
+          if(length(target_existing_ids) > 0) {
+            ml_output_df <- lapply(target_existing_ids, function(target_id) {
+              output <- read.csv(paste0(data_directory, 'support-bundle-summary-ml/', target_id, '-summary.csv'))
+            }) %>% do.call(rbind, .)
+          }
+        }
+        
+        
+        
+        # If there are any existing execution ids left...
+        if(length(ml_execution_ids) > 0) {
+          ml_execution_ids <- paste0(ml_execution_ids, collapse="|")
+          ml_support_bundles <- all_file_paths[grepl(ml_execution_ids, all_file_paths) & !grepl("\\.zip", all_file_paths)]
+    
+          # # Now, identify any non-error "Error/Failed" files and push them through the model api
+          # # Machine learning API
+          all_files <- list.files(ml_support_bundles, full.names=TRUE)
+          all_files <- all_files[grep("logjam|events|execution", all_files)]
+          # #a <- Sys.time()
+          model_file_errors <- lapply(all_files, function(target_file_name) {
+            target_file_name <- all_files[56]
+            target_file <- readLines(target_file_name)
+            url <- model_rest_url # located in credentials.R (same with model_api_key)
+            response <- httr::POST(
+              url,
+              authenticate(model_api_key, model_api_key, type = "basic"),
+              body=toJSON(list(data=list(text = target_file)), auto_unbox = TRUE),
+              content_type("application/json")
+            )
+    
+            predictions <- content(response)
+            predictions <- unname(unlist(predictions$result))
+    
+            num_errors <- length(predictions[which(predictions != "none")])
+            # Identify any potential errors which are not none. If they exist, turn it into a dataframe. If not, just cbind that stuff
+            if(num_errors > 0) {
+              error_lines <- which(predictions != "none")
+              error_type <- predictions[error_lines]
+              error <- target_file[error_lines]
+              error_description <- target_file[error_lines]
+              data <- data.frame('Error'=errors, 'Line_Number'=error_lines, 'Context'=error_description, 'Error_Type'=error_type)
+              data$File_Path <- target_file_name
+              datetime_str <- stringi::stri_extract(data$Context, regex="\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z")
+              data$Date_Time <- lubridate::ymd_hms(datetime_str, tz = "UTC")
+              data$execution_id <- lapply(data$File_Path, function(file_path) {
+                file_path <- stringi::stri_split(file_path, regex="/") %>% unlist()
+                execution_id <- file_path[length(file_path)-1]
+              })
+    
+              associated_node <- target_file[grep("assignedNodeName", target_file)]
+              associated_node <- stringi::stri_extract(associated_node, regex="ip-[0-9]+-[0-9]+-[0-9]+-[0-9]+\\..*\\.compute.internal")
+              if(length(associated_node) > 0) {
+                data$Node <- associated_node
+              } else {
+                data$Node <- NA
+              }
+    
+              out <- data
+            } else {
+              out <- data.frame(
+                Error = character(0),
+                Line_Number = integer(0),
+                Context = character(0),
+                Error_Type = character(0),
+                File_Path = character(0),
+                Node = character(0)
+              )
+            }
+          }) %>% do.call(rbind, .)
+          
+          browser()
+          # Save out the identified errors
+          lapply(unique(model_file_errors$execution_id), function(target_id) {
+            error_subset <- model_file_errors[which(model_file_errors$execution_id == target_id),]
+            summary_directory <- paste0(data_directory, "support-bundle-summary-ml")
+            summary_csv_path <- paste0(summary_directory, "/", target_id, "-summary.csv")
+            
+            write.csv(error_subset, summary_csv_path, row.names=FALSE)
+          })
+          
+          output_df <- rbind(output_df, model_file_errors)
+        }
+      }
+      #
+      #
+      # browser()
       #zip_files <- list.files(path = dest_dir, pattern = "\\.zip$", full.names = TRUE)
       # Delete the zip files
       incProgress(1/2)
       #   ############################# END #################################
-      
-    })
+
+    }) # withProgress Wrapper
     #################### END OF FOR LOOP ########################
     output_df$Execution_Status <- report_df()$status[match(output_df$execution_id, report_df()$run_id)]
-    
+
     metadata_df(output_df)
     #browser()
   })
 
+
+  ##### Reactive to Trigger Modal for switching on ML capabilities #####
+  observeEvent(input$use_ml_model, {
+    # Check if the radio button is toggled to "True"
+    if(!is.null(input$use_ml_model) & input$use_ml_model == TRUE) {
+      # Show modal dialog when toggled to "True"
+      showModal(modalDialog(
+        title = "Use Model to Identify Errors?",
+        "Using the model to enhance regular expression patterns may require additional time. Continue?",
+        footer = tagList(
+          actionButton("cancel", "Cancel"),
+          actionButton("continue", "Continue")
+        )
+      ))
+    }
+  })
+
+  # # Handling the 'Continue' action
+  observeEvent(input$continue, {
+    removeModal()
+  })
+
+  # # Revert to "False" if "Cancel" is pressed
+  observeEvent(input$cancel, {
+    updateRadioButtons(session, "use_ml_model", selected = FALSE)
+    removeModal()
+  })
+
   
+  
+  ##### Errors Captured Table #####
   metadata_agg <- shiny::reactive({
     if(!is.null(metadata_df())) {
       #browser()
