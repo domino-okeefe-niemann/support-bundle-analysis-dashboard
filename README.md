@@ -84,13 +84,13 @@ This will be sourced at the beginning of startup.
 
 ---
 
-## Environment
+## Application Environment/Dockerfile
 
 Before you can properly run the application, you need to create an environment that includes the various R packages that are used to perform ETL processes and visualize results. This can be done by navigating to `Environments > Create Environment`. Specify to `Customize before building` and use the existing base image `5.7 Domino Standard Environment Py3.9 R4.3.1`. Enter the following into `Dockerfile Instructions`:
 
 
 ```
-RUN R --no-save -e 'install.packages(c("shiny", "shinydashboard", "DT", "digest", "data.table", "highcharter", "viridis", "shinyjs", "dplyr", "stringi", "httr", "tools", "magrittr", "lubridate", "bs4Dash", "shinycssloaders", "rintrojs"))'
+RUN R --no-save -e 'install.packages(c("shiny", "shinydashboard", "DT", "digest", "data.table", "highcharter", "viridis", "shinyjs", "dplyr", "stringi", "httr", "tools", "magrittr", "lubridate", "bs4Dash", "shinycssloaders", "rintrojs", "crul"))'
 ```
 
 --
@@ -116,7 +116,7 @@ The regex lookup table can be found under the path: [mnt/code/data/regex_lookup.
 **NOTE:** The model should only be used on a small number of support bundles due to time and resource constraints.
 
 
-**Dockerfile**:
+**Machine Learning Dockerfile**:
 ```
 FROM nvcr.io/nvidia/pytorch:22.12-py3
 
