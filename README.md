@@ -101,7 +101,7 @@ RUN R --no-save -e 'install.packages(c("shiny", "shinydashboard", "DT", "digest"
 
 In conducting the error analysis, the program parses through log files and identifies errors as hits on regular expression pattern matches. In this current iteration, regex expressions are manually maintained and can be edited via the `Regex Error Filters` tab.
 
-The regex lookup table can be found under the path: ()[mnt/code/data/regex_lookup.csv]
+The regex lookup table can be found under the path: [](mnt/code/data/regex_lookup.csv)
 
 ### Machine Learning Model
 
