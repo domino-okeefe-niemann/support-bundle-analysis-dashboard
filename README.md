@@ -97,6 +97,18 @@ RUN R --no-save -e 'install.packages(c("shiny", "shinydashboard", "DT", "digest"
 
 ## Error Analysis Identification/Classification Methods
 
+### Regular Expression Patterns
+
 In conducting the error analysis, the program parses through log files and identifies errors as hits on regular expression pattern matches. In this current iteration, regex expressions are manually maintained and can be edited via the `Regex Error Filters` tab.
 
 The regex lookup table can be found under the path: `mnt/code/data/regex_lookup.csv`
+
+### Machine Learning Model
+
+<ol>
+<li>Run analysis of “Error” and “Succeeded” support bundles for the desired amount of time. This should put the regex summaries into the support-bundle-summary directory within the dataset folder. 
+
+<li> Run the runbook mentioned above (on a gpu instance) to train on all the logs. It will randomly sample lines from the “Succeeded” bundles and label them as “no error”. The frequency of this label is 50% of the 
+
+<li> Once you have trained the model, update the model path in machine_learning/model.py and launch it via the model api. Take the <model-api-key> and the  <model-rest-url> and include it into the credentials.R file as outlined in the readme.
+</ol>
