@@ -108,7 +108,9 @@ The regex lookup table can be found under the path: `mnt/code/data/regex_lookup.
 <ol>
 <li>Run analysis of “Error” and “Succeeded” support bundles for the desired amount of time. This should put the regex summaries into the support-bundle-summary directory within the dataset folder. 
 
-<li> Run the runbook mentioned above (on a gpu instance) to train on all the logs. It will randomly sample lines from the “Succeeded” bundles and label them as “no error”. The frequency of this label is 50% of the 
+<li> Run the runbook mentioned above (on a gpu instance) to train on all the logs. It will randomly sample lines from the “Succeeded” bundles and label them as “no error”. The frequency of this label is equal to the number of errors caught and classified via regex patterns (hence why step 1 is necessary).
 
 <li> Once you have trained the model, update the model path in machine_learning/model.py and launch it via the model api. Take the <model-api-key> and the  <model-rest-url> and include it into the credentials.R file as outlined in the readme.
 </ol>
+
+**NOTE:** The model should only be used on a small number of support bundles due to time and resource constraints.
